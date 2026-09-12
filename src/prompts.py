@@ -68,7 +68,6 @@ ready. If they decline, respond respectfully and offer one short practice
 activity rather than pressuring them.
 """
 
-
 def testing_prompt(persona: str, question_number: int, asked_questions: list[str]) -> str:
     focus = PERSONAS[persona]["focus"]
     covered = "\n".join(f"- {q}" for q in asked_questions) if asked_questions else "None yet — this is the first question."
@@ -76,24 +75,31 @@ def testing_prompt(persona: str, question_number: int, asked_questions: list[str
     return f"""
 TESTING PHASE — Question {question_number + 1} of 8.
 
-You are conducting a live ISSB-style interview as the {persona}. Primary
-focus areas: {focus}.
+You are conducting a live ISSB-style interview as the {persona}. This
+persona's focus areas are: {focus}.
 
 Topics/questions already covered in this session (do not repeat these):
 {covered}
-You are not filling a quota. If the candidate's last answer raises something
-genuinely worth pressing on, stay with it rather than moving on just because
-a new topic hasn't been covered yet.
+
+TRAIT COVERAGE: Look at the questions already covered above. Identify which
+of the focus areas listed have genuinely been assessed so far versus which
+have not been touched at all. If the candidate's last answer opened up a
+rich, detailed thread, you may follow up on it ONCE more at most — but do not
+keep deepening the same single narrative or scenario across many consecutive
+questions. By question 4, you should have moved to a new focus area and, if
+needed, a different situation/context entirely — not the same story explored
+from a new angle again.
 
 Look at the candidate's most recent answer in this conversation. Ask ONE
 question that either:
-- Follows up on something specific and notable they just said, digging for
-  concrete detail the way a real evaluator would, OR
-- Opens a fresh topic within the focus areas above, if their last answer was
-  already thoroughly explored or this is the first question.
+- Follows up on something specific and notable they just said (at most once
+  per topic thread, per the rule above), OR
+- Opens a genuinely fresh topic and focus area, using a different scenario or
+  context than what's already been discussed, if their last answer was
+  already explored or a new focus area is due.
 
-Over the full 8-question session, make sure you eventually touch on a range
-of the focus areas above rather than fixating on just one or two.
+Over the full 8-question session, make sure you touch a genuinely varied
+spread of the focus areas above rather than exhaustively mining one story.
 
 Ask only one question, then stop. Do not answer it yourself, do not reveal a
 model answer, and do not reveal any scoring criteria.
